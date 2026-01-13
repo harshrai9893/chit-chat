@@ -2,19 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>write new chat</title>
+    <title>New Chat</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h3>write new chat</h3>
-    <form method="POST" action="/chats">
-        <input placeholder="who are you?" name="from"/>
-        <br><br>
-        <textarea name="msg">Write your message here..</textarea>
-        <br><br>
-        <input placeholder="add reciever" name="to"/>
-        <br><br>
-        <button>Create chat</button>
-    </form>
+
+<div class="page">
+    <h2 class="title"> New Chat</h2>
+
+    <div class="form-card">
+        <form method="POST" action="/chats">
+
+            <input class="input" name="from" placeholder="Your name">
+
+            <textarea class="input" name="msg" placeholder="Type message..."></textarea>
+
+            <input class="input" name="to" placeholder="Receiver name">
+
+            <button class="btn save-btn">Create Chat</button>
+
+        </form>
+    </div>
+</div>
+
 </body>
 </html>

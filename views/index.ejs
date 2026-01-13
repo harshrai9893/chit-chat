@@ -2,35 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>chit-chat</title>
-    <link rel="stylesheet" href="style.css"/>
+    <title>Chats</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-      <h3>All chats!</h3>
-      <form method="get" action="/chats/new">
-      <button >New Chat</button>
-      </form>
-      <br>
-      <% for(let chat of chats){%>
-        <div class="chat">
-            <p>From : <i><%= chat.from %></i> </p>
-            <div class="msg">
-                <p><%= chat.msg%></p>
-                <form method="get" action="/chats/<%= chat._id%>/edit">
-                    <button>Edit</button>
-                </form>
-                <br>
-                  <form method="post" action="/chats/<%= chat._id%>?_method=DELETE">
-                    <button>Delete</button>
-                </form>
+
+<div class="page">
+    <h2 class="title"> All Chats</h2>
+
+    <a href="/chats/new" class="btn new-btn">+ New Chat</a>
+
+    <% for(let chat of chats){ %>
+        <div class="chat-card">
+
+            <div class="chat-header">
+                <span class="from"><%= chat.from %></span>
+                <span class="time">
+                    <%= chat.created_at.toString().slice(0, 21) %>
+                </span>
             </div>
-            <p>Recieved by : <i><%= chat.to %></i> </p>
-            <hr>
-            <p><%= chat.created_at.toString().split(" ")[4]%></p>
-           <p><%= chat.created_at.toString().split(" ").slice(0,4).join("-")%></p>
-        </div> 
-        <br/><br/>
-      <% }%>
+
+            <div class="chat-msg">
+                <%= chat.msg %>
+            </div>
+
+            <div class="chat-footer">
+                <span class="to">To: <%= chat.to %></span>
+
+                <div class="actions">
+                    <a href="/chats/<%= chat._id %>/edit" class="btn edit-btn">Edit</a>
+
+                    <form method="POST" action="/chats/<%= chat._id %>?_method=DELETE">
+                        <button class="btn delete-btn">Delete</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    <% } %>
+</div>
+
 </body>
 </html>
