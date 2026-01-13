@@ -19,7 +19,7 @@ main()
 .catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/chitchat');
+  await mongoose.connect('mongodb+srv://Harshrai05:Harsh14114@cluster0.ajpeqqi.mongodb.net/?appName=Cluster0');
 }
 
 // index route ----
