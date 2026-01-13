@@ -3,7 +3,6 @@ const app = express();
 const mongoose = require('mongoose');
 const path = require("path");
 const Chat = require("./models/chat.js");
-const chat = require("./models/chat.js");
 const methodOverride = require("method-override");
 
 app.set("views",path.join(__dirname,"views"));
@@ -12,19 +11,21 @@ app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 
-main()
-.then(()=>{
-    console.log("connection successfull")
-})
-.catch(err => console.log(err));
+// main()
+// .then(()=>{
+//     console.log("connection successfull")
+// })
+// .catch(err => console.log(err));
 
-async function main() {
-  await mongoose.connect('mongodb+srv://Harshrai05:Harsh14114@cluster0.ajpeqqi.mongodb.net/?appName=Cluster0');
-}
+ 
+ mongoose.connect("mongodb+srv://Harshrai05:Harsh14114@cluster0.ajpeqqi.mongodb.net/chatApp")
+.then(() => console.log("MongoDB Connected "))
+.catch(err => console.log("MongoDB Error ", err));
+
 
 // index route ----
 app.get("/chats",async (req,res)=>{
-   let chats= await chat.find();
+   let chats= await Chat.find();
 //    console.log(chats);
    res.render("index.ejs",{chats});
 });
@@ -67,7 +68,7 @@ app.get("/chats/:id/edit" ,async  (req,res)=>{
 app.put("/chats/:id" , async(req,res)=>{
     let{id}= req.params;
     let {msg : newMsg} = req.body;
-    let updatedChat = await chat.findByIdAndUpdate(id,
+    let updatedChat = await Chat.findByIdAndUpdate(id,
         {msg:newMsg},
         {runValidators:true, new: true}
     );
